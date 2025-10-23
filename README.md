@@ -45,9 +45,7 @@ Cada projeto é uma oportunidade de **aprender, experimentar e evoluir**. 🚀
 
 ---
 
-## 📫 Contato
-
-Vamos nos conectar e trocar ideias sobre programação ou tecnologia!  
+## 📫 Contato 
 
 - GitHub: [felipeamlozano-ui](https://github.com/felipeamlozano-ui)  
 - E-mail: [felipe.a.m.lozano@gmail.com](mailto:felipe.a.m.lozano@gmail.com)  
