@@ -1,4 +1,4 @@
-# Olá, eu sou Felipe Augusto! 👋
+# Olá, eu sou o Felipe Augusto! 
 
 ![Coding GIF](https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif)
 
