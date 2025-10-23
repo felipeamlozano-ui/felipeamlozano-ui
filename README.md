@@ -39,7 +39,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 - **Python**: Scripts e aprendizado de bibliotecas novas  
 - Banco de dados com **MySQL**  
 
-Cada projeto é uma oportunidade de **aprender, experimentar e evoluir**. 🚀
+Cada projeto é um novo aprendizado e desafio!
 
 ![Coding Animation](https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif)
 
