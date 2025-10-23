@@ -36,7 +36,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 - Desenvolvimento web: **sites e aplicações** usando HTML, CSS, JS e PHP  
 - Programação em **C/C++**: scripts e pequenos programas de lógica  
-- **Python**: automação, scripts e aprendizado de bibliotecas novas  
+- **Python**: Scripts e aprendizado de bibliotecas novas  
 - Banco de dados com **MySQL**  
 
 Cada projeto é uma oportunidade de **aprender, experimentar e evoluir**. 🚀
