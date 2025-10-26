@@ -3,12 +3,11 @@ name: Atualizar projetos recentes no README
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */12 * * *' # roda a cada 12 horas (opcional)
+    - cron: '0 */12 * * *' # roda a cada 12 horas
   push:
     branches:
       - main
 
-# Permissões necessárias para escrever no README
 permissions:
   contents: write
 
@@ -28,6 +27,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const username = 'felipeamlozano-ui';
+            const fs = require('fs');
+            const path = 'README.md';
+
             // Pega os 3 repositórios mais recentemente atualizados
             const { data: repos } = await github.rest.repos.listForUser({
               username,
@@ -36,32 +38,42 @@ jobs:
               per_page: 3
             });
 
-            const fs = require('fs');
-            const path = 'README.md';
-
             if (!fs.existsSync(path)) {
-              throw new Error('README.md não encontrado no repositório (coloque o README na raiz).');
+              throw new Error('README.md não encontrado na raiz do repositório.');
             }
 
             let readme = fs.readFileSync(path, 'utf8');
 
-            const projectsSection = `## 💻 Meus Projetos Recentes\n\n<!-- start-projects -->\n\n${repos.map(repo => `### 🔹 [${repo.name}](${repo.html_url})\n${repo.description ? repo.description : '_Sem descrição ainda._'}\n![Preview](https://opengraph.githubassets.com/1/${repo.full_name})\n`).join('\n')}\n<!-- end-projects -->\n`;
+            // Gera a seção de projetos
+            const projectsSection = `## Meus Projetos Recentes
 
+<!-- start-projects -->
+${repos.map(repo => 
+`### 🔹 [${repo.name}](${repo.html_url})
+${repo.description ? repo.description : '_Sem descrição ainda._'}
+
+![Preview](https://opengraph.githubassets.com/1/${repo.full_name})
+
+`).join('\n')}
+<!-- end-projects -->
+`;
+
+            // Substitui ou adiciona a seção no README
             if (readme.includes('<!-- start-projects -->') && readme.includes('<!-- end-projects -->')) {
-              const startIndex = readme.indexOf('<!-- start-projects -->');
-              const endIndex = readme.indexOf('<!-- end-projects -->', startIndex) + '<!-- end-projects -->'.length;
-              const newReadme = readme.slice(0, startIndex) + projectsSection + readme.slice(endIndex);
-              if (newReadme !== readme) {
-                fs.writeFileSync(path, newReadme, 'utf8');
+              const updated = readme.replace(
+                /<!-- start-projects -->[\s\S]*<!-- end-projects -->/m,
+                projectsSection
+              );
+              if (updated !== readme) {
+                fs.writeFileSync(path, updated, 'utf8');
                 console.log('README atualizado com os últimos projetos.');
               } else {
-                console.log('Nenhuma alteração necessária no README.');
+                console.log('Nenhuma mudança detectada no README.');
               }
             } else {
-              // Se os marcadores não existirem, adiciona a seção no final
               readme += '\n\n' + projectsSection;
               fs.writeFileSync(path, readme, 'utf8');
-              console.log('Marcadores não encontrados — adicionado seção no final do README.');
+              console.log('Adicionada nova seção de projetos no README.');
             }
 
       - name: Commitar e enviar alterações (se houver)
@@ -70,7 +82,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           if git diff --cached --quiet; then
-            echo "Sem alterações para commitar"
+            echo "✅ Nenhuma alteração para commitar"
           else
             git commit -m "🔄 Atualização automática dos últimos projetos"
             git push
