@@ -32,16 +32,21 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-## 💻 Projetos e interesses
+## 💻 Meus Projetos Recentes
 
-- Desenvolvimento web: **sites e aplicações** usando HTML, CSS, JS e PHP  
-- Programação em **C/C++**: scripts e pequenos programas de lógica  
-- **Python**: Scripts e aprendizado de bibliotecas novas  
-- Banco de dados com **MySQL**  
+<p align="center">
+  <a href="https://github.com/felipeamlozano-ui">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO1&theme=tokyonight" />
+  </a>
+  <a href="https://github.com/felipeamlozano-ui">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO2&theme=tokyonight" />
+  </a>
+  <a href="https://github.com/felipeamlozano-ui">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO3&theme=tokyonight" />
+  </a>
+</p>
 
-Cada projeto é um novo aprendizado e desafio!
-
-![Coding Animation](https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif)
+> ⚙️ *Esses cards são atualizados automaticamente conforme novos projetos são criados no meu GitHub.*
 
 ---
 
