@@ -53,3 +53,51 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 </p>
 
 <h3 align="center">✨ Sempre aprendendo, sempre codando! ✨</h3>
+\n\n<!-- start-projects -->\n<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">
+<a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">
+      <div style="
+        width:270px; border-radius:12px; overflow:hidden;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+        background:linear-gradient(135deg, hsl(106,70%,20%) 0%, hsl(22,70%,30%) 100%);
+        border:1px solid rgba(0,0,0,0.08);
+      ">
+        <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" alt="felipeamlozano-ui imagem"
+          style="width:100%; height:150px; object-fit:cover; display:block;"/>
+        <div style="padding:12px 14px; background:#ffffffcc; text-align:left;">
+          <div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">felipeamlozano-ui</div>
+          <div style="font-size:12.5px; line-height:1.45; color:#4b5563;">&lt;h1 align="center"&gt;👋 Olá, eu sou o Felipe Augusto!&lt;/h1&gt;</div>
+        </div>
+      </div>
+    </a>
+<a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">
+      <div style="
+        width:270px; border-radius:12px; overflow:hidden;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+        background:linear-gradient(135deg, hsl(28,70%,20%) 0%, hsl(196,70%,30%) 100%);
+        border:1px solid rgba(0,0,0,0.08);
+      ">
+        <img src="https://avatars.githubusercontent.com/u/236654111?v=4&s=280" alt="Apple-Watch-Simple-Page imagem"
+          style="width:100%; height:150px; object-fit:cover; display:block;"/>
+        <div style="padding:12px 14px; background:#ffffffcc; text-align:left;">
+          <div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Apple-Watch-Simple-Page</div>
+          <div style="font-size:12.5px; line-height:1.45; color:#4b5563;">In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</div>
+        </div>
+      </div>
+    </a>
+<a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">
+      <div style="
+        width:270px; border-radius:12px; overflow:hidden;
+        box-shadow:0 6px 14px rgba(0,0,0,0.15);
+        background:linear-gradient(135deg, hsl(132,70%,20%) 0%, hsl(204,70%,30%) 100%);
+        border:1px solid rgba(0,0,0,0.08);
+      ">
+        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=felipeamlozano-ui%2FSimple-Audio-Book" alt="Simple-Audio-Book imagem"
+          style="width:100%; height:150px; object-fit:cover; display:block;"/>
+        <div style="padding:12px 14px; background:#ffffffcc; text-align:left;">
+          <div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Simple-Audio-Book</div>
+          <div style="font-size:12.5px; line-height:1.45; color:#4b5563;">In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</div>
+        </div>
+      </div>
+    </a>
+</div>
+\n<!-- end-projects -->\n
