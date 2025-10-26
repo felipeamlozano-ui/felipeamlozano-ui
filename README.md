@@ -69,6 +69,7 @@ In this project, Im learned about DOM(Document Object Manipulation) With JS and 
   <a href="https://github.com/felipeamlozano-ui">
     <img src="https://img.shields.io/badge/GitHub-felipeamlozano--ui-181717?style=for-the-badge&logo=github"/>
   </a>
+  <br>
   <a href="mailto:felipe.a.m.lozano@gmail.com">
     <img src="https://img.shields.io/badge/E--mail-felipe.a.m.lozano@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
