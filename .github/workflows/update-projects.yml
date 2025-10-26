@@ -39,6 +39,14 @@ jobs:
               per_page: 3
             });
 
+            // Busca topics para escolher imagem temática
+            async function getTopics(owner, repo) {
+              try {
+                const { data } = await github.rest.repos.getAllTopics({ owner, repo });
+                return data.names || [];
+              } catch { return []; }
+            }
+
             // Fallback de descrição: resumo curto do README
             async function getReadmeSummary(owner, repo) {
               try {
@@ -49,67 +57,76 @@ jobs:
                 for (const line of lines) {
                   const clean = line.trim();
                   if (!clean) { if (firstPara.length) break; continue; }
-                  if (/^#{1,6}\s/.test(clean)) continue;           // ignora títulos
-                  if (/!\[.*\]\(.*\)/.test(clean)) continue;        // ignora imagens/badges
+                  if (/^#{1,6}\s/.test(clean)) continue;    // ignora títulos
+                  if (/!\[.*\]\(.*\)/.test(clean)) continue; // ignora imagens/badges
                   firstPara.push(clean);
                 }
                 const summary = firstPara.join(' ');
-                return summary ? summary.slice(0, 180) : null;
+                return summary ? summary.slice(0, 200) : null;
               } catch { return null; }
             }
 
-            // Fundo único por projeto
-            function gradientForRepo(repo) {
-              const h1 = repo.id % 360;
-              const h2 = (repo.id * 7) % 360;
-              return `linear-gradient(135deg, hsl(${h1},70%,20%) 0%, hsl(${h2},70%,30%) 100%)`;
-            }
+            // Escolhe thumbnail temática baseada em topics ou linguagem
+            function pickImage(repo, topics) {
+              const name = (repo.language || '').toLowerCase();
+              const all = (topics || []).map(t => t.toLowerCase());
+              const match = (keys) => keys.some(k => all.includes(k) || name.includes(k));
 
-            // Três imagens diferentes alternando por índice
-            function imageForIndex(i, repo) {
-              const variants = [
-                `https://opengraph.githubassets.com/1/${repo.full_name}`,                   // Open Graph
-                (repo.owner?.avatar_url ? `${repo.owner.avatar_url}&s=280` : 'https://avatars.githubusercontent.com/u/0?s=280'), // Avatar
-                `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(repo.full_name)}` // Identicon
+              // Palavras-chave -> imagens Unsplash (sem API key; fotos livres)
+              if (match(['web', 'site', 'html', 'css', 'javascript', 'frontend'])) {
+                return 'https://images.unsplash.com/photo-1520974735194-9d56ad4a8b28?w=800&q=80';
+              }
+              if (match(['python', 'data', 'ml', 'ai'])) {
+                return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80';
+              }
+              if (match(['mobile', 'android', 'ios'])) {
+                return 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80';
+              }
+              if (match(['audio', 'music', 'sound'])) {
+                return 'https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&q=80';
+              }
+              if (match(['php', 'backend', 'api'])) {
+                return 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=800&q=80';
+              }
+              // Fallback variado por hash do repo.id
+              const choices = [
+                'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+                'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
+                'https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=800&q=80'
               ];
-              return variants[i % variants.length];
+              return choices[repo.id % choices.length];
             }
 
-            // Monta HTML dos cards
-            let projectsHTML = '<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">\n';
+            // Monta uma TABELA de 3 colunas para garantir lado-a-lado
+            let html = '<table><tr>\n';
+
             for (let i = 0; i < repos.length; i++) {
               const repo = repos[i];
+              const topics = await getTopics(repo.owner.login, repo.name);
               const descPrimary = repo.description?.trim();
               const descFallback = await getReadmeSummary(repo.owner.login, repo.name);
               const desc = (descPrimary || descFallback || 'Sem descrição ainda.')
                 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-              const bg = gradientForRepo(repo);
-              const img = imageForIndex(i, repo);
+              const img = pickImage(repo, topics);
 
-              projectsHTML +=
-                `<a href="${repo.html_url}" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">
-                  <div style="
-                    width:270px; border-radius:12px; overflow:hidden;
-                    box-shadow:0 6px 14px rgba(0,0,0,0.15);
-                    background:${bg};
-                    border:1px solid rgba(0,0,0,0.08);
-                  ">
-                    <img src="${img}" alt="${repo.name} imagem"
-                      style="width:100%; height:150px; object-fit:cover; display:block;"/>
-                    <div style="padding:12px 14px; background:#ffffffcc; text-align:left;">
-                      <div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">${repo.name}</div>
-                      <div style="font-size:12.5px; line-height:1.45; color:#4b5563;">${desc}</div>
+              html +=
+                `<td align="center" valign="top" style="padding:10px;">
+                  <a href="${repo.html_url}" target="_blank" style="text-decoration:none;">
+                    <img src="${img}" alt="${repo.name}" width="260" height="150" style="border-radius:12px; object-fit:cover;" />
+                    <div style="margin-top:8px; font-weight:700; font-size:14px; color:#1f2328;">${repo.name}</div>
+                    <div style="margin-top:6px; max-width:260px; font-size:12.5px; line-height:1.45; color:#4b5563;">
+                      ${desc}
                     </div>
-                  </div>
-                </a>\n`;
+                  </a>
+                </td>\n`;
             }
-            projectsHTML += '</div>';
 
-            // Retorna como resultado (multiline seguro)
-            return projectsHTML;
+            html += '</tr></table>';
 
-      - name: Salvar HTML gerado em arquivo com heredoc
+            return html;
+
+      - name: Salvar HTML gerado em arquivo (heredoc)
         run: |
           cat > section.html <<'SECTION'
           ${{ steps.repos.outputs.result }}
