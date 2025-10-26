@@ -36,6 +36,8 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
+## 💻 Meus Projetos Recentes
+
 <!-- start-projects -->
 
 ### 🔹 [felipeamlozano-ui](https://github.com/felipeamlozano-ui/felipeamlozano-ui)
@@ -51,6 +53,7 @@ In this project, Im learned about DOM(Document Object Manipulation) With JS and 
 ![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book)
 
 <!-- end-projects -->
+
 
 
 ---
