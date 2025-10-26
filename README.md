@@ -98,3 +98,27 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
   </a>
 </p>
 <!-- end-projects -->
+
+
+<!-- start-projects -->
+<p align="center">
+  <a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin: 10px;">
+    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" width="250px" height="140px" style="border-radius:10px;"/>
+    <br/>
+    <b>felipeamlozano-ui</b><br/>
+    <sub>Sem descrição ainda.</sub>
+  </a>
+  <a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin: 10px;">
+    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" width="250px" height="140px" style="border-radius:10px;"/>
+    <br/>
+    <b>Apple-Watch-Simple-Page</b><br/>
+    <sub>In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</sub>
+  </a>
+  <a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin: 10px;">
+    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" width="250px" height="140px" style="border-radius:10px;"/>
+    <br/>
+    <b>Simple-Audio-Book</b><br/>
+    <sub>In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</sub>
+  </a>
+</p>
+<!-- end-projects -->
