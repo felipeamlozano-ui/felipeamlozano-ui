@@ -18,19 +18,14 @@ jobs:
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
-      - name: Buscar 3 repositórios mais recentes e atualizar README
+      - name: Buscar 3 repositórios mais recentes
+        id: repos
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const username = 'felipeamlozano-ui';
-            const fs = require('fs');
-            const path = 'README.md';
-
-            // Pega os 3 repositórios mais recentemente atualizados
             const { data: repos } = await github.rest.repos.listForUser({
               username,
               sort: 'updated',
@@ -38,13 +33,6 @@ jobs:
               per_page: 3
             });
 
-            if (!fs.existsSync(path)) {
-              throw new Error('README.md não encontrado na raiz do repositório.');
-            }
-
-            let readme = fs.readFileSync(path, 'utf8');
-
-            // Cria visualização compacta lado a lado
             const projectsHTML = `
 <p align="center">
 ${repos.map(repo => `
@@ -52,31 +40,20 @@ ${repos.map(repo => `
     <img src="https://opengraph.githubassets.com/1/${repo.full_name}" width="250px" height="140px" style="border-radius:10px;"/>
     <br/>
     <b>${repo.name}</b><br/>
-    <sub>${repo.description ? repo.description : 'Sem descrição ainda.'}</sub>
+    <sub>${repo.description || 'Sem descrição ainda.'}</sub>
   </a>
 `).join('')}
 </p>
 `;
 
-            const projectsSection = `<!-- start-projects -->\n${projectsHTML}\n<!-- end-projects -->`;
+            // Exporta o HTML como output para o próximo step
+            core.setOutput("projects", projectsHTML);
 
-            // Substitui ou adiciona a seção no README
-            if (readme.includes('<!-- start-projects -->') && readme.includes('<!-- end-projects -->')) {
-              const updated = readme.replace(
-                /<!-- start-projects -->[\\s\\S]*<!-- end-projects -->/m,
-                projectsSection
-              );
-              if (updated !== readme) {
-                fs.writeFileSync(path, updated, 'utf8');
-                console.log('README atualizado com os últimos projetos.');
-              } else {
-                console.log('Nenhuma mudança detectada no README.');
-              }
-            } else {
-              readme += '\n\n' + projectsSection;
-              fs.writeFileSync(path, readme, 'utf8');
-              console.log('Adicionada nova seção de projetos no README.');
-            }
+      - name: Atualizar README.md
+        run: |
+          section="${{ steps.repos.outputs.projects }}"
+          # Substitui a seção entre os marcadores
+          sed -i '/<!-- start-projects -->/,/<!-- end-projects -->/c<!-- start-projects -->\n'"$section"'\n<!-- end-projects -->' README.md
 
       - name: Commitar e enviar alterações (se houver)
         run: |
