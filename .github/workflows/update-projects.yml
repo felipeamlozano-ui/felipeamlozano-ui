@@ -31,7 +31,6 @@ jobs:
           script: |
             const username = 'felipeamlozano-ui';
 
-            // Busca os 3 últimos repositórios atualizados
             const { data: repos } = await github.rest.repos.listForUser({
               username,
               sort: 'updated',
@@ -39,7 +38,6 @@ jobs:
               per_page: 3
             });
 
-            // Busca topics para escolher imagem temática
             async function getTopics(owner, repo) {
               try {
                 const { data } = await github.rest.repos.getAllTopics({ owner, repo });
@@ -47,7 +45,6 @@ jobs:
               } catch { return []; }
             }
 
-            // Fallback de descrição: resumo curto do README
             async function getReadmeSummary(owner, repo) {
               try {
                 const { data } = await github.rest.repos.getReadme({ owner, repo });
@@ -57,8 +54,8 @@ jobs:
                 for (const line of lines) {
                   const clean = line.trim();
                   if (!clean) { if (firstPara.length) break; continue; }
-                  if (/^#{1,6}\s/.test(clean)) continue;    // ignora títulos
-                  if (/!\[.*\]\(.*\)/.test(clean)) continue; // ignora imagens/badges
+                  if (/^#{1,6}\s/.test(clean)) continue;
+                  if (/!\[.*\]\(.*\)/.test(clean)) continue;
                   firstPara.push(clean);
                 }
                 const summary = firstPara.join(' ');
@@ -66,65 +63,72 @@ jobs:
               } catch { return null; }
             }
 
-            // Escolhe thumbnail temática baseada em topics ou linguagem
             function pickImage(repo, topics) {
               const name = (repo.language || '').toLowerCase();
               const all = (topics || []).map(t => t.toLowerCase());
               const match = (keys) => keys.some(k => all.includes(k) || name.includes(k));
 
-              // Palavras-chave -> imagens Unsplash (sem API key; fotos livres)
-              if (match(['web', 'site', 'html', 'css', 'javascript', 'frontend'])) {
-                return 'https://images.unsplash.com/photo-1520974735194-9d56ad4a8b28?w=800&q=80';
-              }
-              if (match(['python', 'data', 'ml', 'ai'])) {
-                return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80';
-              }
-              if (match(['mobile', 'android', 'ios'])) {
-                return 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80';
-              }
-              if (match(['audio', 'music', 'sound'])) {
-                return 'https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&q=80';
-              }
-              if (match(['php', 'backend', 'api'])) {
-                return 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=800&q=80';
-              }
-              // Fallback variado por hash do repo.id
+              if (match(['web','site','html','css','javascript','frontend']))
+                return 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=640&q=80';
+              if (match(['python','data','ml','ai']))
+                return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=640&q=80';
+              if (match(['audio','music','sound']))
+                return 'https://images.unsplash.com/photo-1511376777868-611b54f68947?w=640&q=80';
+              if (match(['mobile','android','ios']))
+                return 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=640&q=80';
+              if (match(['php','backend','api']))
+                return 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=640&q=80';
+
               const choices = [
-                'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
-                'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
-                'https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=800&q=80'
+                'https://images.unsplash.com/photo-1518770660439-4636190af475?w=640&q=80',
+                'https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=640&q=80',
+                'https://images.unsplash.com/photo-1520974735194-9d56ad4a8b28?w=640&q=80'
               ];
               return choices[repo.id % choices.length];
             }
 
-            // Monta uma TABELA de 3 colunas para garantir lado-a-lado
-            let html = '<table><tr>\n';
+            // Monta tabela Markdown com 3 colunas
+            let rowImgs = [];
+            let rowTitles = [];
+            let rowDescs = [];
 
-            for (let i = 0; i < repos.length; i++) {
-              const repo = repos[i];
+            for (const repo of repos) {
               const topics = await getTopics(repo.owner.login, repo.name);
+              const img = pickImage(repo, topics);
               const descPrimary = repo.description?.trim();
               const descFallback = await getReadmeSummary(repo.owner.login, repo.name);
               const desc = (descPrimary || descFallback || 'Sem descrição ainda.')
-                .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                .replace(/\|/g, '\\|'); // evitar quebrar tabela
 
-              const img = pickImage(repo, topics);
-
-              html +=
-                `<td align="center" valign="top" style="padding:10px;">
-                  <a href="${repo.html_url}" target="_blank" style="text-decoration:none;">
-                    <img src="${img}" alt="${repo.name}" width="260" height="150" style="border-radius:12px; object-fit:cover;" />
-                    <div style="margin-top:8px; font-weight:700; font-size:14px; color:#1f2328;">${repo.name}</div>
-                    <div style="margin-top:6px; max-width:260px; font-size:12.5px; line-height:1.45; color:#4b5563;">
-                      ${desc}
-                    </div>
-                  </a>
-                </td>\n`;
+              rowImgs.push(`[![${repo.name}](${img})](${repo.html_url})`);
+              rowTitles.push(`[${repo.name}](${repo.html_url})`);
+              rowDescs.push(desc);
             }
 
-            html += '</tr></table>';
+            // Se não vierem 3 repos por algum motivo, completa com vazio
+            while (rowImgs.length < 3) { rowImgs.push(''); rowTitles.push(''); rowDescs.push(''); }
 
-            return html;
+            const table = `
+<table>
+  <tr>
+    <td align="center" width="33%">${rowImgs[0]}</td>
+    <td align="center" width="33%">${rowImgs[1]}</td>
+    <td align="center" width="33%">${rowImgs[2]}</td>
+  </tr>
+  <tr>
+    <td align="center"><strong>${rowTitles[0]}</strong></td>
+    <td align="center"><strong>${rowTitles[1]}</strong></td>
+    <td align="center"><strong>${rowTitles[2]}</strong></td>
+  </tr>
+  <tr>
+    <td align="center">${rowDescs[0]}</td>
+    <td align="center">${rowDescs[1]}</td>
+    <td align="center">${rowDescs[2]}</td>
+  </tr>
+</table>
+`.trim();
+
+            return table;
 
       - name: Salvar HTML gerado em arquivo (heredoc)
         run: |
