@@ -11,6 +11,10 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
+<!-- start-projects -->
+<!-- end-projects -->
+
+
 ## 🛠 Tecnologias que eu mais uso
 
 <p align="center">
@@ -38,9 +42,6 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-<!-- start-projects -->
-<!-- end-projects -->
-
 ---
 
 ## 📫 Contato
@@ -55,84 +56,3 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 </p>
 
 <h3 align="center">✨ Sempre aprendendo, sempre codando! ✨</h3>
-
-
-<!-- start-projects -->
-<p align="center">
-  <a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>felipeamlozano-ui</b><br/>
-    <sub>Sem descrição ainda.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Apple-Watch-Simple-Page</b><br/>
-    <sub>In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Simple-Audio-Book</b><br/>
-    <sub>In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</sub>
-  </a>
-</p>
-<!-- end-projects -->
-
-
-<!-- start-projects -->
-<p align="center">
-  <a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>felipeamlozano-ui</b><br/>
-    <sub>Sem descrição ainda.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Apple-Watch-Simple-Page</b><br/>
-    <sub>In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Simple-Audio-Book</b><br/>
-    <sub>In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</sub>
-  </a>
-</p>
-<!-- end-projects -->
-
-
-<!-- start-projects -->
-<p align="center">
-  <a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>felipeamlozano-ui</b><br/>
-    <sub>Sem descrição ainda.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Apple-Watch-Simple-Page</b><br/>
-    <sub>In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</sub>
-  </a>
-  <a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>Simple-Audio-Book</b><br/>
-    <sub>In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</sub>
-  </a>
-</p>
-<!-- end-projects -->
-\n\n<!-- start-projects -->\n<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">
-<a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(106,70%,20%) 0%, hsl(22,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" alt="felipeamlozano-ui OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">felipeamlozano-ui</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">Sem descrição ainda.</div></div></div></a>
-<a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(28,70%,20%) 0%, hsl(196,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" alt="Apple-Watch-Simple-Page OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Apple-Watch-Simple-Page</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</div></div></div></a>
-<a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(132,70%,20%) 0%, hsl(204,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" alt="Simple-Audio-Book OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Simple-Audio-Book</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</div></div></div></a>
-</div>\n<!-- end-projects -->\n\n\n<!-- start-projects -->\n<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">
-<a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(106,70%,20%) 0%, hsl(22,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" alt="felipeamlozano-ui OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">felipeamlozano-ui</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">Sem descrição ainda.</div></div></div></a>
-<a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(28,70%,20%) 0%, hsl(196,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page" alt="Apple-Watch-Simple-Page OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Apple-Watch-Simple-Page</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.</div></div></div></a>
-<a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;"><div style="width:270px; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.35); background:linear-gradient(135deg, hsl(132,70%,20%) 0%, hsl(204,70%,30%) 100%); border:1px solid rgba(255,255,255,0.08); "><img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" alt="Simple-Audio-Book OpenGraph" style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/><div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);"><div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">Simple-Audio-Book</div><div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.</div></div></div></a>
-</div>\n<!-- end-projects -->\n
