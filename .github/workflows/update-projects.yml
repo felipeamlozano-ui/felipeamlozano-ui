@@ -1,75 +1,77 @@
 name: Atualizar projetos recentes no README
 
-
 on:
-schedule:
-- cron: '0 */12 * * *' # agendamento (opcional) — roda a cada 12 horas
-workflow_dispatch: # permite execução manual
-push:
-branches:
-- main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */12 * * *' # roda a cada 12 horas (opcional)
+  push:
+    branches:
+      - main
 
+# Permissões necessárias para escrever no README
+permissions:
+  contents: write
 
 jobs:
-update-readme:
-runs-on: ubuntu-latest
+  update-readme:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-steps:
-- name: Clonar repositório
-uses: actions/checkout@v4
-with:
-persist-credentials: true
+      - name: Buscar 3 repositórios mais recentes e atualizar README
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const username = 'felipeamlozano-ui';
+            // Pega os 3 repositórios mais recentemente atualizados
+            const { data: repos } = await github.rest.repos.listForUser({
+              username,
+              sort: 'updated',
+              direction: 'desc',
+              per_page: 3
+            });
 
+            const fs = require('fs');
+            const path = 'README.md';
 
-- name: Buscar 3 repositórios mais recentes e atualizar README
-uses: actions/github-script@v7
-with:
-github-token: ${{ secrets.GITHUB_TOKEN }}
-script: |
-const username = 'felipeamlozano-ui';
-const { data: repos } = await github.rest.repos.listForUser({
-username,
-sort: 'updated',
-direction: 'desc',
-per_page: 3
-});
+            if (!fs.existsSync(path)) {
+              throw new Error('README.md não encontrado no repositório (coloque o README na raiz).');
+            }
 
+            let readme = fs.readFileSync(path, 'utf8');
 
-const fs = require('fs');
-const path = 'README.md';
-if (!fs.existsSync(path)) {
-core.setFailed('README.md não encontrado no repositório.');
-return;
-}
+            const projectsSection = `## 💻 Meus Projetos Recentes\n\n<!-- start-projects -->\n\n${repos.map(repo => `### 🔹 [${repo.name}](${repo.html_url})\n${repo.description ? repo.description : '_Sem descrição ainda._'}\n![Preview](https://opengraph.githubassets.com/1/${repo.full_name})\n`).join('\n')}\n<!-- end-projects -->\n`;
 
+            if (readme.includes('<!-- start-projects -->') && readme.includes('<!-- end-projects -->')) {
+              const startIndex = readme.indexOf('<!-- start-projects -->');
+              const endIndex = readme.indexOf('<!-- end-projects -->', startIndex) + '<!-- end-projects -->'.length;
+              const newReadme = readme.slice(0, startIndex) + projectsSection + readme.slice(endIndex);
+              if (newReadme !== readme) {
+                fs.writeFileSync(path, newReadme, 'utf8');
+                console.log('README atualizado com os últimos projetos.');
+              } else {
+                console.log('Nenhuma alteração necessária no README.');
+              }
+            } else {
+              // Se os marcadores não existirem, adiciona a seção no final
+              readme += '\n\n' + projectsSection;
+              fs.writeFileSync(path, readme, 'utf8');
+              console.log('Marcadores não encontrados — adicionado seção no final do README.');
+            }
 
-let readme = fs.readFileSync(path, 'utf8');
-
-
-const projectsSection = `## 💻 Meus Projetos Recentes\n\n<!-- start-projects -->\n\n${repos.map(repo => `### 🔹 [${repo.name}](${repo.html_url})\n${repo.description ? repo.description : '_Sem descrição ainda._'}\n![Preview](https://opengraph.githubassets.com/1/${repo.full_name})\n`).join('\n')}\n<!-- end-projects -->\n`;
-
-
-// Substitui o bloco entre o marcador start-projects e end-projects
-if (readme.includes('<!-- start-projects -->')) {
-const start = readme.indexOf('<!-- start-projects -->');
-const end = readme.indexOf('<!-- end-projects -->', start);
-if (end === -1) {
-core.setFailed('Marcador <!-- end-projects --> não encontrado no README.md');
-return;
-}
-const before = readme.slice(0, start);
-const after = readme.slice(end + '<!-- end-projects -->'.length);
-const newReadme = before + projectsSection + after;
-
-
-if (newReadme === readme) {
-core.setOutput('changed', 'false');
-} else {
-fs.writeFileSync(path, newReadme, 'utf8');
-core.setOutput('changed', 'true');
-}
-} else {
-// Se os marcadores não existirem, adiciona a seção no final
-readme += '\n\n' + projectsSection;
-fi
+      - name: Commitar e enviar alterações (se houver)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "Sem alterações para commitar"
+          else
+            git commit -m "🔄 Atualização automática dos últimos projetos"
+            git push
+          fi
