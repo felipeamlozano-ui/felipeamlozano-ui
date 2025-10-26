@@ -1,6 +1,8 @@
-<h1 align="center">Olá, eu sou o Felipe Augusto!</h1>
+<h1 align="center">👋 Olá, eu sou o Felipe Augusto!</h1>
 
-
+<p align="center">
+  <img src="https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif" width="250px" alt="Coding GIF"/>
+</p>
 
 <p align="center">
 Sou estudante no <b>IFSULDEMINAS - Campus Muzambinho</b>, cursando <b>Ensino Médio integrado ao Técnico em Informática</b>.<br>
@@ -24,7 +26,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-## Minhas estatísticas do GitHub
+## 📊 Minhas estatísticas do GitHub
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=felipeamlozano-ui&show_icons=true&theme=tokyonight&count_private=true&hide_border=true&border_radius=12" width="460" alt="GitHub Stats"/>
@@ -39,35 +41,36 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 ## 💻 Meus Projetos Recentes
 
 <!-- start-projects -->
+<div align="center">
 
-### 🔹 [felipeamlozano-ui](https://github.com/felipeamlozano-ui/felipeamlozano-ui)
-_Sem descrição ainda._
-![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui)
+<a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui">
+  <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui" width="260" style="border-radius: 10px; margin: 10px;" alt="felipeamlozano-ui"/>
+</a>
 
-### 🔹 [Apple-Watch-Simple-Page](https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page)
-In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.
-![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch-Simple-Page)
+<a href="https://github.com/felipeamlozano-ui/Apple-Watch--Simple-Page">
+  <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch--Simple-Page" width="260" style="border-radius: 10px; margin: 10px;" alt="Apple Watch Project"/>
+</a>
 
-### 🔹 [Simple-Audio-Book](https://github.com/felipeamlozano-ui/Simple-Audio-Book)
-In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.
-![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book)
+<a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book">
+  <img src="https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book" width="260" style="border-radius: 10px; margin: 10px;" alt="Simple Audio Book"/>
+</a>
 
+</div>
 <!-- end-projects -->
 
-
+<p align="center"><i>🔁 Esses cards são atualizados automaticamente conforme novos projetos são criados ou modificados no GitHub.</i></p>
 
 ---
 
-## Contato
+## 📫 Contato
 
 <p align="center">
   <a href="https://github.com/felipeamlozano-ui">
     <img src="https://img.shields.io/badge/GitHub-felipeamlozano--ui-181717?style=for-the-badge&logo=github"/>
   </a>
-  <br>
   <a href="mailto:felipe.a.m.lozano@gmail.com">
     <img src="https://img.shields.io/badge/E--mail-felipe.a.m.lozano@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
 </p>
 
-<h3 align="center">Sempre aprendendo, sempre codando! </h3>
+<h3 align="center">✨ Sempre aprendendo, sempre codando! ✨</h3>
