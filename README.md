@@ -38,8 +38,6 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-## 💻 Meus Projetos Recentes
-
 <!-- start-projects -->
 <div align="center">
 
@@ -57,8 +55,6 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 </div>
 <!-- end-projects -->
-
-<p align="center"><i>🔁 Esses cards são atualizados automaticamente conforme novos projetos são criados ou modificados no GitHub.</i></p>
 
 ---
 
