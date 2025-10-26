@@ -3,7 +3,7 @@ name: Atualizar projetos recentes no README
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */2 * * *' # roda a cada 2 horas
+    - cron: '0 */2 * * *'
   push:
     branches:
       - main
@@ -18,12 +18,16 @@ jobs:
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Buscar 3 repositórios mais recentes
         id: repos
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          result-encoding: string
           script: |
             const username = 'felipeamlozano-ui';
 
@@ -35,55 +39,47 @@ jobs:
               per_page: 3
             });
 
-            // Tenta obter um resumo curto do README quando a descrição estiver vazia
+            // Fallback de descrição: resumo curto do README
             async function getReadmeSummary(owner, repo) {
               try {
                 const { data } = await github.rest.repos.getReadme({ owner, repo });
                 const content = Buffer.from(data.content, 'base64').toString('utf8');
-
                 const lines = content.split(/\r?\n/);
                 const firstPara = [];
                 for (const line of lines) {
                   const clean = line.trim();
-                  if (!clean) {
-                    if (firstPara.length) break;
-                    continue;
-                  }
-                  // ignora títulos e badges
-                  if (/^#{1,6}\s/.test(clean)) continue;
-                  if (/!\[.*\]\(.*\)/.test(clean)) continue;
+                  if (!clean) { if (firstPara.length) break; continue; }
+                  if (/^#{1,6}\s/.test(clean)) continue;           // ignora títulos
+                  if (/!\[.*\]\(.*\)/.test(clean)) continue;        // ignora imagens/badges
                   firstPara.push(clean);
                 }
                 const summary = firstPara.join(' ');
                 return summary ? summary.slice(0, 180) : null;
-              } catch {
-                return null;
-              }
+              } catch { return null; }
             }
 
             // Fundo único por projeto
             function gradientForRepo(repo) {
               const h1 = repo.id % 360;
               const h2 = (repo.id * 7) % 360;
-              return 'linear-gradient(135deg, hsl(' + h1 + ',70%,20%) 0%, hsl(' + h2 + ',70%,30%) 100%)';
+              return `linear-gradient(135deg, hsl(${h1},70%,20%) 0%, hsl(${h2},70%,30%) 100%)`;
             }
 
-            // Escolhe uma de 3 imagens diferentes por card
+            // Três imagens diferentes alternando por índice
             function imageForIndex(i, repo) {
               const variants = [
-                'https://opengraph.githubassets.com/1/' + repo.full_name,                 // Open Graph do repo
-                (repo.owner && repo.owner.avatar_url) ? repo.owner.avatar_url + '&s=280' : 'https://avatars.githubusercontent.com/u/0?s=280', // Avatar do owner
-                'https://api.dicebear.com/7.x/identicon/svg?seed=' + encodeURIComponent(repo.full_name) // Ícone gerado
+                `https://opengraph.githubassets.com/1/${repo.full_name}`,                   // Open Graph
+                (repo.owner?.avatar_url ? `${repo.owner.avatar_url}&s=280` : 'https://avatars.githubusercontent.com/u/0?s=280'), // Avatar
+                `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(repo.full_name)}` // Identicon
               ];
               return variants[i % variants.length];
             }
 
-            // Monta HTML dos cards: nome + descrição + imagem alternada + fundo único
+            // Monta HTML dos cards
             let projectsHTML = '<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">\n';
-
             for (let i = 0; i < repos.length; i++) {
               const repo = repos[i];
-              const descPrimary = repo.description && repo.description.trim();
+              const descPrimary = repo.description?.trim();
               const descFallback = await getReadmeSummary(repo.owner.login, repo.name);
               const desc = (descPrimary || descFallback || 'Sem descrição ainda.')
                 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -92,32 +88,32 @@ jobs:
               const img = imageForIndex(i, repo);
 
               projectsHTML +=
-                '<a href="' + repo.html_url + '" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">' +
-                  '<div style="' +
-                    'width:270px; border-radius:12px; overflow:hidden; ' +
-                    'box-shadow:0 6px 14px rgba(0,0,0,0.15); ' +
-                    'background:' + bg + '; ' +
-                    'border:1px solid rgba(0,0,0,0.08); ' +
-                  '">' +
-                    '<img src="' + img + '" alt="' + repo.name + ' imagem" ' +
-                      'style="width:100%; height:150px; object-fit:cover; display:block;"/>' +
-                    '<div style="padding:12px 14px; background:#ffffffcc; text-align:left;">' +
-                      '<div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">' + repo.name + '</div>' +
-                      '<div style="font-size:12.5px; line-height:1.45; color:#4b5563;">' + desc + '</div>' +
-                    '</div>' +
-                  '</div>' +
-                '</a>\n';
+                `<a href="${repo.html_url}" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">
+                  <div style="
+                    width:270px; border-radius:12px; overflow:hidden;
+                    box-shadow:0 6px 14px rgba(0,0,0,0.15);
+                    background:${bg};
+                    border:1px solid rgba(0,0,0,0.08);
+                  ">
+                    <img src="${img}" alt="${repo.name} imagem"
+                      style="width:100%; height:150px; object-fit:cover; display:block;"/>
+                    <div style="padding:12px 14px; background:#ffffffcc; text-align:left;">
+                      <div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">${repo.name}</div>
+                      <div style="font-size:12.5px; line-height:1.45; color:#4b5563;">${desc}</div>
+                    </div>
+                  </div>
+                </a>\n`;
             }
-
             projectsHTML += '</div>';
 
-            core.setOutput("projects", projectsHTML);
+            // Retorna como resultado (multiline seguro)
+            return projectsHTML;
 
-      - name: Salvar HTML gerado em arquivo
-        env:
-          PROJECTS_HTML: ${{ steps.repos.outputs.projects }}
+      - name: Salvar HTML gerado em arquivo com heredoc
         run: |
-          printf "%s" "$PROJECTS_HTML" > section.html
+          cat > section.html <<'SECTION'
+          ${{ steps.repos.outputs.result }}
+          SECTION
 
       - name: Atualizar README.md com a seção de projetos
         run: |
@@ -151,7 +147,7 @@ jobs:
           git add README.md
           if git diff --cached --quiet; then
             echo "✅ Nenhuma alteração para commitar"
-          else:
+          else
             git commit -m "🔄 Atualização automática dos últimos projetos"
-            git push
+            git push origin HEAD:main
           fi
