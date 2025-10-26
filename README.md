@@ -1,13 +1,18 @@
-# Olá, eu sou o Felipe Augusto! 
+# Olá, eu sou o Felipe Augusto!
+
 
 ![Coding GIF](https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif)
 
-Sou estudante no **IFSULDEMINAS - Campus Muzambinho**, cursando **Ensino Médio integrado ao Técnico em Informática**.  
+
+Sou estudante no **IFSULDEMINAS - Campus Muzambinho**, cursando **Ensino Médio integrado ao Técnico em Informática**.
 Apaixonado por programação e tecnologia, estou sempre explorando novas linguagens, frameworks e desafios para aprender e me desenvolver. 💻✨
+
 
 ---
 
+
 ## 🛠 Tecnologias que eu mais uso
+
 
 ![Python](https://img.shields.io/badge/-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![C++](https://img.shields.io/badge/-C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
@@ -18,41 +23,44 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 ![PHP](https://img.shields.io/badge/-PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
+
 ---
+
 
 ## 📊 Minhas estatísticas do GitHub
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=felipeamlozano-ui&show_icons=true&theme=tokyonight&count_private=true&hide_border=true" alt="GitHub Stats" />
-</p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=felipeamlozano-ui&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" />
+<img src="https://github-readme-stats.vercel.app/api?username=felipeamlozano-ui&show_icons=true&theme=tokyonight&count_private=true&hide_border=true" alt="GitHub Stats" />
 </p>
+
+
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=felipeamlozano-ui&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" />
+</p>
+
 
 ---
+
 
 ## 💻 Meus Projetos Recentes
 
-<p align="center">
-  <a href="https://github.com/felipeamlozano-ui">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO1&theme=tokyonight" />
-  </a>
-  <a href="https://github.com/felipeamlozano-ui">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO2&theme=tokyonight" />
-  </a>
-  <a href="https://github.com/felipeamlozano-ui">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felipeamlozano-ui&repo=REPO3&theme=tokyonight" />
-  </a>
-</p>
 
-> ⚙️ *Esses cards são atualizados automaticamente conforme novos projetos são criados no meu GitHub.*
+<!-- start-projects -->
+> ⚙️ *Esta seção será atualizada automaticamente pelo GitHub Action com os 3 repositórios públicos mais recentemente atualizados.*
+
+
+<!-- end-projects -->
+
 
 ---
 
-## 📫 Contato 
 
-- GitHub: [felipeamlozano-ui](https://github.com/felipeamlozano-ui)  
-- E-mail: [felipe.a.m.lozano@gmail.com](mailto:felipe.a.m.lozano@gmail.com)  
+## 📫 Contato
+
+
+- GitHub: [felipeamlozano-ui](https://github.com/felipeamlozano-ui)
+- E-mail: [felipe.a.m.lozano@gmail.com](mailto:felipe.a.m.lozano@gmail.com)
+
 
 ✨ **Sempre aprendendo, sempre codando!**
