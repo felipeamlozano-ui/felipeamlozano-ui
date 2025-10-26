@@ -12,10 +12,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 ---
 
 <!-- start-projects -->
-
-
 <!-- end-projects -->
-
 
 ## 🛠 Tecnologias que eu mais uso
 
@@ -41,8 +38,6 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=felipeamlozano-ui&layout=compact&theme=tokyonight&hide_border=true&border_radius=12&langs_count=8" width="460" alt="Top Languages"/>
 </p>
-
----
 
 ---
 
