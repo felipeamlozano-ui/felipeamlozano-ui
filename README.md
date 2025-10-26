@@ -129,4 +129,33 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
       </a>
     </td>
 </tr></table>
+\n<!-- end-projects -->\n\n\n<!-- start-projects -->\n<table><tr>
+<td align="center" valign="top" style="padding:10px;">
+      <a href="https://github.com/felipeamlozano-ui/felipeamlozano-ui" target="_blank" style="text-decoration:none;">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="felipeamlozano-ui" width="260" height="150" style="border-radius:12px; object-fit:cover;" />
+        <div style="margin-top:8px; font-weight:700; font-size:14px; color:#1f2328;">felipeamlozano-ui</div>
+        <div style="margin-top:6px; max-width:260px; font-size:12.5px; line-height:1.45; color:#4b5563;">
+          &lt;h1 align="center"&gt;👋 Olá, eu sou o Felipe Augusto!&lt;/h1&gt;
+        </div>
+      </a>
+    </td>
+<td align="center" valign="top" style="padding:10px;">
+      <a href="https://github.com/felipeamlozano-ui/Apple-Watch-Simple-Page" target="_blank" style="text-decoration:none;">
+        <img src="https://images.unsplash.com/photo-1520974735194-9d56ad4a8b28?w=800&q=80" alt="Apple-Watch-Simple-Page" width="260" height="150" style="border-radius:12px; object-fit:cover;" />
+        <div style="margin-top:8px; font-weight:700; font-size:14px; color:#1f2328;">Apple-Watch-Simple-Page</div>
+        <div style="margin-top:6px; max-width:260px; font-size:12.5px; line-height:1.45; color:#4b5563;">
+          In this project im learn about image manipulation with JS and how to change pictures with event click listener. And for finish im learn how to improve CSS with JS.
+        </div>
+      </a>
+    </td>
+<td align="center" valign="top" style="padding:10px;">
+      <a href="https://github.com/felipeamlozano-ui/Simple-Audio-Book" target="_blank" style="text-decoration:none;">
+        <img src="https://images.unsplash.com/photo-1520974735194-9d56ad4a8b28?w=800&q=80" alt="Simple-Audio-Book" width="260" height="150" style="border-radius:12px; object-fit:cover;" />
+        <div style="margin-top:8px; font-weight:700; font-size:14px; color:#1f2328;">Simple-Audio-Book</div>
+        <div style="margin-top:6px; max-width:260px; font-size:12.5px; line-height:1.45; color:#4b5563;">
+          In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.
+        </div>
+      </a>
+    </td>
+</tr></table>
 \n<!-- end-projects -->\n
