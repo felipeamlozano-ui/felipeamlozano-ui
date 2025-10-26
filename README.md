@@ -5,7 +5,7 @@
 
 
 Sou estudante no **IFSULDEMINAS - Campus Muzambinho**, cursando **Ensino Médio integrado ao Técnico em Informática**.
-Apaixonado por programação e tecnologia, estou sempre explorando novas linguagens, frameworks e desafios para aprender e me desenvolver. 💻✨
+Apaixonado por programação e tecnologia, estou sempre explorando novas linguagens, frameworks e desafios para aprender e me desenvolver. 
 
 
 ---
@@ -27,7 +27,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 ---
 
 
-## 📊 Minhas estatísticas do GitHub
+## Minhas estatísticas do GitHub
 
 
 <p align="center">
@@ -42,11 +42,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-
-## 💻 Meus Projetos Recentes
-
-
-## 💻 Meus Projetos Recentes
+##  Meus Projetos Recentes
 
 <!-- start-projects -->
 
@@ -69,11 +65,11 @@ In this project, Im learned about DOM(Document Object Manipulation) With JS and 
 ---
 
 
-## 📫 Contato
+##  Contato
 
 
 - GitHub: [felipeamlozano-ui](https://github.com/felipeamlozano-ui)
 - E-mail: [felipe.a.m.lozano@gmail.com](mailto:felipe.a.m.lozano@gmail.com)
 
 
-✨ **Sempre aprendendo, sempre codando!**
+ **Sempre aprendendo, sempre codando!**
