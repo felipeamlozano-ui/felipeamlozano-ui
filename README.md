@@ -1,8 +1,6 @@
-<h1 align="center">👋 Olá, eu sou o Felipe Augusto!</h1>
+<h1 align="center">Olá, eu sou o Felipe Augusto!</h1>
 
-<p align="center">
-  <img src="https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif" width="250px" alt="Coding GIF"/>
-</p>
+
 
 <p align="center">
 Sou estudante no <b>IFSULDEMINAS - Campus Muzambinho</b>, cursando <b>Ensino Médio integrado ao Técnico em Informática</b>.<br>
@@ -26,7 +24,7 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 
 ---
 
-## 📊 Minhas estatísticas do GitHub
+## Minhas estatísticas do GitHub
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=felipeamlozano-ui&show_icons=true&theme=tokyonight&count_private=true&hide_border=true&border_radius=12" width="460" alt="GitHub Stats"/>
@@ -37,12 +35,6 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 </p>
 
 ---
-
-## 💻 Meus Projetos Recentes
-
-## 💻 Meus Projetos Recentes
-
-## 💻 Meus Projetos Recentes
 
 <!-- start-projects -->
 
@@ -61,12 +53,9 @@ In this project, Im learned about DOM(Document Object Manipulation) With JS and 
 <!-- end-projects -->
 
 
-
-<p align="center"><i>🔁 Esses cards são atualizados automaticamente conforme novos projetos são criados ou modificados no GitHub.</i></p>
-
 ---
 
-## 📫 Contato
+## Contato
 
 <p align="center">
   <a href="https://github.com/felipeamlozano-ui">
@@ -78,4 +67,4 @@ In this project, Im learned about DOM(Document Object Manipulation) With JS and 
   </a>
 </p>
 
-<h3 align="center">✨ Sempre aprendendo, sempre codando! ✨</h3>
+<h3 align="center">Sempre aprendendo, sempre codando! </h3>
