@@ -33,27 +33,52 @@ jobs:
               per_page: 3
             });
 
-            const projectsHTML = `
-<p align="center">
-${repos.map(repo => `
-  <a href="${repo.html_url}" target="_blank" style="margin: 10px;">
-    <img src="https://opengraph.githubassets.com/1/${repo.full_name}" width="250px" height="140px" style="border-radius:10px;"/>
-    <br/>
-    <b>${repo.name}</b><br/>
-    <sub>${repo.description || 'Sem descrição ainda.'}</sub>
-  </a>
-`).join('')}
-</p>
-`;
+            // Monta HTML sem usar template literals com ${} para não conflitar com YAML
+            let projectsHTML = '<p align="center">\n';
+            projectsHTML += repos.map(repo =>
+              '  <a href="' + repo.html_url + '" target="_blank" style="margin: 10px;">\n' +
+              '    <img src="https://opengraph.githubassets.com/1/' + repo.full_name + '" width="250px" height="140px" style="border-radius:10px;"/>\n' +
+              '    <br/>\n' +
+              '    <b>' + repo.name + '</b><br/>\n' +
+              '    <sub>' + (repo.description ? repo.description : 'Sem descrição ainda.') + '</sub>\n' +
+              '  </a>\n'
+            ).join('');
+            projectsHTML += '</p>';
 
-            // Exporta o HTML como output para o próximo step
             core.setOutput("projects", projectsHTML);
 
-      - name: Atualizar README.md
+      - name: Salvar HTML gerado em arquivo
+        env:
+          PROJECTS_HTML: ${{ steps.repos.outputs.projects }}
         run: |
-          section="${{ steps.repos.outputs.projects }}"
-          # Substitui a seção entre os marcadores
-          sed -i '/<!-- start-projects -->/,/<!-- end-projects -->/c<!-- start-projects -->\n'"$section"'\n<!-- end-projects -->' README.md
+          printf "%s" "$PROJECTS_HTML" > section.html
+
+      - name: Atualizar README.md com a seção de projetos
+        run: |
+          python << 'PY'
+          import re, io, sys
+
+          # Lê a seção gerada
+          with io.open('section.html', 'r', encoding='utf-8') as f:
+              section = f.read()
+
+          # Lê o README
+          with io.open('README.md', 'r', encoding='utf-8') as f:
+              readme = f.read()
+
+          # Padrão da seção entre marcadores
+          pattern = r'<!-- start-projects -->[\\s\\S]*?<!-- end-projects -->'
+
+          if re.search(pattern, readme):
+              readme = re.sub(pattern, f'<!-- start-projects -->\n{section}\n<!-- end-projects -->', readme)
+              print('README atualizado: seção substituída.')
+          else:
+              readme += '\n\n<!-- start-projects -->\n' + section + '\n<!-- end-projects -->\n'
+              print('README atualizado: seção adicionada.')
+
+          with io.open('README.md', 'w', encoding='utf-8') as f:
+              f.write(readme)
+          PY
 
       - name: Commitar e enviar alterações (se houver)
         run: |
