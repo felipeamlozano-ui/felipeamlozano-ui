@@ -46,11 +46,24 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 ## 💻 Meus Projetos Recentes
 
 
-<!-- start-projects -->
-> ⚙️ *Esta seção será atualizada automaticamente pelo GitHub Action com os 3 repositórios públicos mais recentemente atualizados.*
+## 💻 Meus Projetos Recentes
 
+<!-- start-projects -->
+
+### 🔹 [felipeamlozano-ui](https://github.com/felipeamlozano-ui/felipeamlozano-ui)
+_Sem descrição ainda._
+![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/felipeamlozano-ui)
+
+### 🔹 [Apple-Watch--Simple-Page](https://github.com/felipeamlozano-ui/Apple-Watch--Simple-Page)
+_Sem descrição ainda._
+![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/Apple-Watch--Simple-Page)
+
+### 🔹 [Simple-Audio-Book](https://github.com/felipeamlozano-ui/Simple-Audio-Book)
+In this project, Im learned about DOM(Document Object Manipulation) With JS and how change music in web page.
+![Preview](https://opengraph.githubassets.com/1/felipeamlozano-ui/Simple-Audio-Book)
 
 <!-- end-projects -->
+
 
 
 ---
