@@ -33,17 +33,39 @@ jobs:
               per_page: 3
             });
 
-            // Monta HTML sem usar template literals com ${} para não conflitar com YAML
-            let projectsHTML = '<p align="center">\n';
-            projectsHTML += repos.map(repo =>
-              '  <a href="' + repo.html_url + '" target="_blank" style="margin: 10px;">\n' +
-              '    <img src="https://opengraph.githubassets.com/1/' + repo.full_name + '" width="250px" height="140px" style="border-radius:10px;"/>\n' +
-              '    <br/>\n' +
-              '    <b>' + repo.name + '</b><br/>\n' +
-              '    <sub>' + (repo.description ? repo.description : 'Sem descrição ainda.') + '</sub>\n' +
-              '  </a>\n'
-            ).join('');
-            projectsHTML += '</p>';
+            function gradientForRepo(repo) {
+              // Gera duas cores HSL diferentes a partir do ID do repo
+              const h1 = (repo.id % 360);
+              const h2 = ((repo.id * 7) % 360);
+              return 'linear-gradient(135deg, hsl(' + h1 + ',70%,20%) 0%, hsl(' + h2 + ',70%,30%) 100%)';
+            }
+
+            // Monta HTML dos cards com nome, descrição, imagem e fundo único
+            let projectsHTML = '<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">\n';
+            projectsHTML += repos.map(repo => {
+              const bg = gradientForRepo(repo);
+              const desc = repo.description ? repo.description : 'Sem descrição ainda.';
+              const og = 'https://opengraph.githubassets.com/1/' + repo.full_name;
+
+              return (
+                '<a href="' + repo.html_url + '" target="_blank" style="margin:12px; text-decoration:none; color:#e6edf3;">' +
+                  '<div style="' +
+                    'width:270px; border-radius:12px; overflow:hidden; ' +
+                    'box-shadow:0 6px 14px rgba(0,0,0,0.35); ' +
+                    'background:' + bg + '; ' +
+                    'border:1px solid rgba(255,255,255,0.08); ' +
+                  '">' +
+                    '<img src="' + og + '" alt="' + repo.name + ' OpenGraph" ' +
+                      'style="width:100%; height:150px; object-fit:cover; display:block; filter:saturate(1.1);"/>' +
+                    '<div style="padding:12px 14px; background:rgba(0,0,0,0.25); backdrop-filter:saturate(1.2);">' +
+                      '<div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">' + repo.name + '</div>' +
+                      '<div style="font-size:12.5px; line-height:1.45; color:#c9d1d9;">' + desc + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</a>'
+              );
+            }).join('\n');
+            projectsHTML += '\n</div>';
 
             core.setOutput("projects", projectsHTML);
 
@@ -56,24 +78,22 @@ jobs:
       - name: Atualizar README.md com a seção de projetos
         run: |
           python << 'PY'
-          import re, io, sys
+          import re, io
 
-          # Lê a seção gerada
           with io.open('section.html', 'r', encoding='utf-8') as f:
               section = f.read()
 
-          # Lê o README
           with io.open('README.md', 'r', encoding='utf-8') as f:
               readme = f.read()
 
-          # Padrão da seção entre marcadores
           pattern = r'<!-- start-projects -->[\\s\\S]*?<!-- end-projects -->'
+          replacement = '<!-- start-projects -->\\n' + section + '\\n<!-- end-projects -->'
 
           if re.search(pattern, readme):
-              readme = re.sub(pattern, f'<!-- start-projects -->\n{section}\n<!-- end-projects -->', readme)
+              readme = re.sub(pattern, replacement, readme)
               print('README atualizado: seção substituída.')
           else:
-              readme += '\n\n<!-- start-projects -->\n' + section + '\n<!-- end-projects -->\n'
+              readme += '\\n\\n' + replacement + '\\n'
               print('README atualizado: seção adicionada.')
 
           with io.open('README.md', 'w', encoding='utf-8') as f:
