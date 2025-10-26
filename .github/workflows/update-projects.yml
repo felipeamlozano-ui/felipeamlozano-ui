@@ -1,0 +1,75 @@
+name: Atualizar projetos recentes no README
+
+
+on:
+schedule:
+- cron: '0 */12 * * *' # agendamento (opcional) — roda a cada 12 horas
+workflow_dispatch: # permite execução manual
+push:
+branches:
+- main
+
+
+jobs:
+update-readme:
+runs-on: ubuntu-latest
+
+
+steps:
+- name: Clonar repositório
+uses: actions/checkout@v4
+with:
+persist-credentials: true
+
+
+- name: Buscar 3 repositórios mais recentes e atualizar README
+uses: actions/github-script@v7
+with:
+github-token: ${{ secrets.GITHUB_TOKEN }}
+script: |
+const username = 'felipeamlozano-ui';
+const { data: repos } = await github.rest.repos.listForUser({
+username,
+sort: 'updated',
+direction: 'desc',
+per_page: 3
+});
+
+
+const fs = require('fs');
+const path = 'README.md';
+if (!fs.existsSync(path)) {
+core.setFailed('README.md não encontrado no repositório.');
+return;
+}
+
+
+let readme = fs.readFileSync(path, 'utf8');
+
+
+const projectsSection = `## 💻 Meus Projetos Recentes\n\n<!-- start-projects -->\n\n${repos.map(repo => `### 🔹 [${repo.name}](${repo.html_url})\n${repo.description ? repo.description : '_Sem descrição ainda._'}\n![Preview](https://opengraph.githubassets.com/1/${repo.full_name})\n`).join('\n')}\n<!-- end-projects -->\n`;
+
+
+// Substitui o bloco entre o marcador start-projects e end-projects
+if (readme.includes('<!-- start-projects -->')) {
+const start = readme.indexOf('<!-- start-projects -->');
+const end = readme.indexOf('<!-- end-projects -->', start);
+if (end === -1) {
+core.setFailed('Marcador <!-- end-projects --> não encontrado no README.md');
+return;
+}
+const before = readme.slice(0, start);
+const after = readme.slice(end + '<!-- end-projects -->'.length);
+const newReadme = before + projectsSection + after;
+
+
+if (newReadme === readme) {
+core.setOutput('changed', 'false');
+} else {
+fs.writeFileSync(path, newReadme, 'utf8');
+core.setOutput('changed', 'true');
+}
+} else {
+// Se os marcadores não existirem, adiciona a seção no final
+readme += '\n\n' + projectsSection;
+fi
