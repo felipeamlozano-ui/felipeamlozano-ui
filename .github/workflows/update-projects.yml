@@ -3,7 +3,7 @@ name: Atualizar projetos recentes no README
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */12 * * *' # roda a cada 12 horas
+    - cron: '0 */2 * * *' # roda a cada 2 horas
   push:
     branches:
       - main
@@ -44,24 +44,26 @@ jobs:
 
             let readme = fs.readFileSync(path, 'utf8');
 
-            // Gera a seção de projetos
-            const projectsSection = `## Meus Projetos Recentes
-
-<!-- start-projects -->
-${repos.map(repo => 
-`### 🔹 [${repo.name}](${repo.html_url})
-${repo.description ? repo.description : '_Sem descrição ainda._'}
-
-![Preview](https://opengraph.githubassets.com/1/${repo.full_name})
-
-`).join('\n')}
-<!-- end-projects -->
+            // Cria visualização compacta lado a lado
+            const projectsHTML = `
+<p align="center">
+${repos.map(repo => `
+  <a href="${repo.html_url}" target="_blank" style="margin: 10px;">
+    <img src="https://opengraph.githubassets.com/1/${repo.full_name}" width="250px" height="140px" style="border-radius:10px;"/>
+    <br/>
+    <b>${repo.name}</b><br/>
+    <sub>${repo.description ? repo.description : 'Sem descrição ainda.'}</sub>
+  </a>
+`).join('')}
+</p>
 `;
+
+            const projectsSection = `<!-- start-projects -->\n${projectsHTML}\n<!-- end-projects -->`;
 
             // Substitui ou adiciona a seção no README
             if (readme.includes('<!-- start-projects -->') && readme.includes('<!-- end-projects -->')) {
               const updated = readme.replace(
-                /<!-- start-projects -->[\s\S]*<!-- end-projects -->/m,
+                /<!-- start-projects -->[\\s\\S]*<!-- end-projects -->/m,
                 projectsSection
               );
               if (updated !== readme) {
