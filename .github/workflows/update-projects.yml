@@ -1,140 +1,157 @@
-steps:
-  - name: Clonar repositório
-    uses: actions/checkout@v4
+name: Atualizar projetos recentes no README
 
-  - name: Buscar 3 repositórios mais recentes
-    id: repos
-    uses: actions/github-script@v7
-    with:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
-      script: |
-        const username = 'felipeamlozano-ui';
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */2 * * *' # roda a cada 2 horas
+  push:
+    branches:
+      - main
 
-        // Busca os 3 últimos repositórios atualizados
-        const { data: repos } = await github.rest.repos.listForUser({
-          username,
-          sort: 'updated',
-          direction: 'desc',
-          per_page: 3
-        });
+permissions:
+  contents: write
 
-        // Tenta obter um resumo curto do README quando a descrição estiver vazia
-        async function getReadmeSummary(owner, repo) {
-          try {
-            const { data } = await github.rest.repos.getReadme({ owner, repo });
-            const content = Buffer.from(data.content, 'base64').toString('utf8');
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
 
-            const lines = content.split(/\r?\n/);
-            const firstPara = [];
-            for (const line of lines) {
-              const clean = line.trim();
-              if (!clean) {
-                if (firstPara.length) break;
-                continue;
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Buscar 3 repositórios mais recentes
+        id: repos
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const username = 'felipeamlozano-ui';
+
+            // Busca os 3 últimos repositórios atualizados
+            const { data: repos } = await github.rest.repos.listForUser({
+              username,
+              sort: 'updated',
+              direction: 'desc',
+              per_page: 3
+            });
+
+            // Tenta obter um resumo curto do README quando a descrição estiver vazia
+            async function getReadmeSummary(owner, repo) {
+              try {
+                const { data } = await github.rest.repos.getReadme({ owner, repo });
+                const content = Buffer.from(data.content, 'base64').toString('utf8');
+
+                const lines = content.split(/\r?\n/);
+                const firstPara = [];
+                for (const line of lines) {
+                  const clean = line.trim();
+                  if (!clean) {
+                    if (firstPara.length) break;
+                    continue;
+                  }
+                  // ignora títulos e badges
+                  if (/^#{1,6}\s/.test(clean)) continue;
+                  if (/!\[.*\]\(.*\)/.test(clean)) continue;
+                  firstPara.push(clean);
+                }
+                const summary = firstPara.join(' ');
+                return summary ? summary.slice(0, 180) : null;
+              } catch {
+                return null;
               }
-              // ignora títulos e badges
-              if (/^#{1,6}\s/.test(clean)) continue;
-              if (/!\[.*\]\(.*\)/.test(clean)) continue;
-              firstPara.push(clean);
             }
-            const summary = firstPara.join(' ');
-            return summary ? summary.slice(0, 180) : null;
-          } catch {
-            return null;
-          }
-        }
 
-        // Fundo único por projeto
-        function gradientForRepo(repo) {
-          const h1 = repo.id % 360;
-          const h2 = (repo.id * 7) % 360;
-          return 'linear-gradient(135deg, hsl(' + h1 + ',70%,20%) 0%, hsl(' + h2 + ',70%,30%) 100%)';
-        }
+            // Fundo único por projeto
+            function gradientForRepo(repo) {
+              const h1 = repo.id % 360;
+              const h2 = (repo.id * 7) % 360;
+              return 'linear-gradient(135deg, hsl(' + h1 + ',70%,20%) 0%, hsl(' + h2 + ',70%,30%) 100%)';
+            }
 
-        // Escolhe uma de 3 imagens diferentes por card
-        function imageForIndex(i, repo) {
-          const variants = [
-            'https://opengraph.githubassets.com/1/' + repo.full_name,                 // Open Graph do repo
-            (repo.owner && repo.owner.avatar_url) ? repo.owner.avatar_url + '&s=280' : 'https://avatars.githubusercontent.com/u/0?s=280', // Avatar do owner
-            'https://api.dicebear.com/7.x/identicon/svg?seed=' + encodeURIComponent(repo.full_name) // Ícone gerado
-          ];
-          return variants[i % variants.length];
-        }
+            // Escolhe uma de 3 imagens diferentes por card
+            function imageForIndex(i, repo) {
+              const variants = [
+                'https://opengraph.githubassets.com/1/' + repo.full_name,                 // Open Graph do repo
+                (repo.owner && repo.owner.avatar_url) ? repo.owner.avatar_url + '&s=280' : 'https://avatars.githubusercontent.com/u/0?s=280', // Avatar do owner
+                'https://api.dicebear.com/7.x/identicon/svg?seed=' + encodeURIComponent(repo.full_name) // Ícone gerado
+              ];
+              return variants[i % variants.length];
+            }
 
-        // Monta HTML dos cards: nome + descrição + imagem alternada + fundo único
-        let projectsHTML = '<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">\n';
+            // Monta HTML dos cards: nome + descrição + imagem alternada + fundo único
+            let projectsHTML = '<div align="center" style="display:flex; flex-wrap:wrap; justify-content:center;">\n';
 
-        for (let i = 0; i < repos.length; i++) {
-          const repo = repos[i];
-          const descPrimary = repo.description && repo.description.trim();
-          const descFallback = await getReadmeSummary(repo.owner.login, repo.name);
-          const desc = (descPrimary || descFallback || 'Sem descrição ainda.')
-            .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            for (let i = 0; i < repos.length; i++) {
+              const repo = repos[i];
+              const descPrimary = repo.description && repo.description.trim();
+              const descFallback = await getReadmeSummary(repo.owner.login, repo.name);
+              const desc = (descPrimary || descFallback || 'Sem descrição ainda.')
+                .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-          const bg = gradientForRepo(repo);
-          const img = imageForIndex(i, repo);
+              const bg = gradientForRepo(repo);
+              const img = imageForIndex(i, repo);
 
-          projectsHTML +=
-            '<a href="' + repo.html_url + '" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">' +
-              '<div style="' +
-                'width:270px; border-radius:12px; overflow:hidden; ' +
-                'box-shadow:0 6px 14px rgba(0,0,0,0.15); ' +
-                'background:' + bg + '; ' +
-                'border:1px solid rgba(0,0,0,0.08); ' +
-              '">' +
-                '<img src="' + img + '" alt="' + repo.name + ' imagem" ' +
-                  'style="width:100%; height:150px; object-fit:cover; display:block;"/>' +
-                '<div style="padding:12px 14px; background:#ffffffcc; text-align:left;">' +
-                  '<div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">' + repo.name + '</div>' +
-                  '<div style="font-size:12.5px; line-height:1.45; color:#4b5563;">' + desc + '</div>' +
-                '</div>' +
-              '</div>' +
-            '</a>\n';
-        }
+              projectsHTML +=
+                '<a href="' + repo.html_url + '" target="_blank" style="margin:12px; text-decoration:none; color:#1f2328;">' +
+                  '<div style="' +
+                    'width:270px; border-radius:12px; overflow:hidden; ' +
+                    'box-shadow:0 6px 14px rgba(0,0,0,0.15); ' +
+                    'background:' + bg + '; ' +
+                    'border:1px solid rgba(0,0,0,0.08); ' +
+                  '">' +
+                    '<img src="' + img + '" alt="' + repo.name + ' imagem" ' +
+                      'style="width:100%; height:150px; object-fit:cover; display:block;"/>' +
+                    '<div style="padding:12px 14px; background:#ffffffcc; text-align:left;">' +
+                      '<div style="font-weight:700; font-size:14.5px; line-height:1.35; margin-bottom:6px;">' + repo.name + '</div>' +
+                      '<div style="font-size:12.5px; line-height:1.45; color:#4b5563;">' + desc + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</a>\n';
+            }
 
-        projectsHTML += '</div>';
+            projectsHTML += '</div>';
 
-        core.setOutput("projects", projectsHTML);
+            core.setOutput("projects", projectsHTML);
 
-  - name: Salvar HTML gerado em arquivo
-    env:
-      PROJECTS_HTML: ${{ steps.repos.outputs.projects }}
-    run: |
-      printf "%s" "$PROJECTS_HTML" > section.html
+      - name: Salvar HTML gerado em arquivo
+        env:
+          PROJECTS_HTML: ${{ steps.repos.outputs.projects }}
+        run: |
+          printf "%s" "$PROJECTS_HTML" > section.html
 
-  - name: Atualizar README.md com a seção de projetos
-    run: |
-      python << 'PY'
-      import re, io
+      - name: Atualizar README.md com a seção de projetos
+        run: |
+          python << 'PY'
+          import re, io
 
-      with io.open('section.html', 'r', encoding='utf-8') as f:
-          section = f.read()
+          with io.open('section.html', 'r', encoding='utf-8') as f:
+              section = f.read()
 
-      with io.open('README.md', 'r', encoding='utf-8') as f:
-          readme = f.read()
+          with io.open('README.md', 'r', encoding='utf-8') as f:
+              readme = f.read()
 
-      pattern = r'<!-- start-projects -->[\\s\\S]*?<!-- end-projects -->'
-      replacement = '<!-- start-projects -->\\n' + section + '\\n<!-- end-projects -->'
+          pattern = r'<!-- start-projects -->[\\s\\S]*?<!-- end-projects -->'
+          replacement = '<!-- start-projects -->\\n' + section + '\\n<!-- end-projects -->'
 
-      if re.search(pattern, readme):
-          readme = re.sub(pattern, replacement, readme)
-          print('README atualizado: seção substituída.')
-      else:
-          readme += '\\n\\n' + replacement + '\\n'
-          print('README atualizado: seção adicionada.')
+          if re.search(pattern, readme):
+              readme = re.sub(pattern, replacement, readme)
+              print('README atualizado: seção substituída.')
+          else:
+              readme += '\\n\\n' + replacement + '\\n'
+              print('README atualizado: seção adicionada.')
 
-      with io.open('README.md', 'w', encoding='utf-8') as f:
-          f.write(readme)
-      PY
+          with io.open('README.md', 'w', encoding='utf-8') as f:
+              f.write(readme)
+          PY
 
-  - name: Commitar e enviar alterações (se houver)
-    run: |
-      git config user.name "github-actions[bot]"
-      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      git add README.md
-      if git diff --cached --quiet; then
-        echo "✅ Nenhuma alteração para commitar"
-      else
-        git commit -m "🔄 Atualização automática dos últimos projetos"
-        git push
-      fi
+      - name: Commitar e enviar alterações (se houver)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "✅ Nenhuma alteração para commitar"
+          else:
+            git commit -m "🔄 Atualização automática dos últimos projetos"
+            git push
+          fi
