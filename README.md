@@ -50,4 +50,3 @@ Apaixonado por programação e tecnologia, estou sempre explorando novas linguag
 </p>
 
 <h3 align="center">✨ Sempre aprendendo, sempre codando! ✨</h3>
-<!-- start-projects --><!-- end-projects -->
