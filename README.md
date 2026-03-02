@@ -1,15 +1,3 @@
-# Olá, eu sou o Felipe Augusto
-
-<p align="center">
-  <img src="https://media.giphy.com/media/26FPJGjhefSJuaRhu/giphy.gif" width="250px" alt="GIF de programação"/>
-</p>
-
-<p align="center">
-Sou estudante no **IFSULDEMINAS - Campus Muzambinho**, cursando **Ensino Médio integrado ao Técnico em Informática**.<br>
-Apaixonado por programação e tecnologia, estou constantemente explorando novas linguagens, frameworks e desafios para desenvolver minhas habilidades.
-</p>
-
----
 
 ## Tecnologias que domino
 
@@ -24,18 +12,6 @@ Apaixonado por programação e tecnologia, estou constantemente explorando novas
   <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
   <img src="https://img.shields.io/badge/-Django-092E20?style=for-the-badge&logo=django&logoColor=white"/>
   <img src="https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
-</p>
-
----
-
-## Minhas estatísticas do GitHub
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=felipeamlozano-ui&show_icons=true&theme=tokyonight&count_private=true&hide_border=true&border_radius=12" width="460" alt="Estatísticas do GitHub"/>
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=felipeamlozano-ui&layout=compact&theme=tokyonight&hide_border=true&border_radius=12" width="460" alt="Linguagens mais usadas"/>
 </p>
 
 ---
